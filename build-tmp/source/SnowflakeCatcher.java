@@ -1,5 +1,21 @@
+import processing.core.*; 
+import processing.data.*; 
+import processing.event.*; 
+import processing.opengl.*; 
+
+import java.util.HashMap; 
+import java.util.ArrayList; 
+import java.io.File; 
+import java.io.BufferedReader; 
+import java.io.PrintWriter; 
+import java.io.InputStream; 
+import java.io.OutputStream; 
+import java.io.IOException; 
+
+public class SnowflakeCatcher extends PApplet {
+
 Glow [] drifters;
-void setup()
+public void setup()
 {
   background(17, 20, 26);
   size(500, 500);
@@ -9,7 +25,7 @@ void setup()
     drifters[a]=new Glow();
   }
 }
-void draw()
+public void draw()
 {
   frameRate(10);
   for(int i=0; i<drifters.length; i++)
@@ -21,7 +37,7 @@ void draw()
     drifters[i].show();
   }
 }
-void mouseDragged()
+public void mouseDragged()
 {
   strokeWeight(1);
   stroke(91, 219, 206, 50);
@@ -45,7 +61,7 @@ class Glow
     speed=(int)(Math.random()*25)+2;
     motion=true;
   }
-  void show()
+  public void show()
   {
     fill(253, 232, 117);
     noStroke();
@@ -55,7 +71,7 @@ class Glow
     fill(243, 209, 249, 35);
     ellipse(x, y, siz*3, siz*3);
   }
-  void lookDown()
+  public void lookDown()
   {
     if(get(x, y+speed+siz) == color(91, 219, 206, 15) || get(x, y+speed+siz) == color(91, 180, 206, 8) || get(x, y+speed+siz) == color(91, 150, 206, 5))
     {
@@ -66,7 +82,7 @@ class Glow
       motion=true;
     }
   }
-  void erase()
+  public void erase()
   {
     fill(17, 20, 26);
     noStroke();
@@ -76,7 +92,7 @@ class Glow
     fill(17, 20, 26);
     ellipse(x, y, siz*3+2, siz*3+2);
   }
-  void move()
+  public void move()
   {
     if (motion==true)
     {
@@ -89,7 +105,7 @@ class Glow
       y=y;
     }
   }
-  void wrap()
+  public void wrap()
   {
     if(y>500)
     {
@@ -101,3 +117,12 @@ class Glow
 }
 
 
+  static public void main(String[] passedArgs) {
+    String[] appletArgs = new String[] { "SnowflakeCatcher" };
+    if (passedArgs != null) {
+      PApplet.main(concat(appletArgs, passedArgs));
+    } else {
+      PApplet.main(appletArgs);
+    }
+  }
+}
